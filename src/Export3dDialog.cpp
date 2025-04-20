@@ -1,7 +1,7 @@
 #include "stdafx.h"
 #include "Export3dDialog.h"
 #include "WMVxSettings.h"
-#include "exporter/FbxExporter.h"
+//#include "exporter/FbxExporter.h"
 #include "core/utility/Logger.h"
 
 Export3dDialog::Export3dDialog(core::GameDatabase* db, core::Scene* _scene, QWidget* parent)
@@ -65,21 +65,21 @@ Export3dDialog::Export3dDialog(core::GameDatabase* db, core::Scene* _scene, QWid
 		}
 
 		try {
-			exporter::FbxExporter exporter(outFile);
-			auto* target = getTargetModel();
-			if (target != nullptr) {
-				AnimationOptions selected;
-				auto checkboxes = ui.scrollAreaAnimations->findChildren<QCheckBox*>();
-				for (auto* checkbox : checkboxes) {
-					if (checkbox->isChecked()) {
-						const auto key = checkbox->text();
-						selected[key] = allAnimationOptions[key];
-					}
-				}
+			// exporter::FbxExporter exporter(outFile);
+			// auto* target = getTargetModel();
+			// if (target != nullptr) {
+			// 	AnimationOptions selected;
+			// 	auto checkboxes = ui.scrollAreaAnimations->findChildren<QCheckBox*>();
+			// 	for (auto* checkbox : checkboxes) {
+			// 		if (checkbox->isChecked()) {
+			// 			const auto key = checkbox->text();
+			// 			selected[key] = allAnimationOptions[key];
+			// 		}
+			// 	}
 
-				exporter.addModel(target, selected);
-			}
-			exporter.execute();
+			// 	exporter.addModel(target, selected);
+			// }
+			// exporter.execute();
 		}
 		catch (std::exception e) {
 			const QString what(e.what());

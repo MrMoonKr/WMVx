@@ -57,8 +57,9 @@ target_compile_definitions(WMVx PRIVATE CASCLIB_NO_AUTO_LINK_LIBRARY)
 # if(BUILD_SHARED_LIBS)
     # target_link_libraries(WDBx PRIVATE CascLib::casc)
 # else()
-    target_link_libraries(WMVx PRIVATE CascLib::casc_static)
+    # target_link_libraries(WMVx PRIVATE CascLib::casc_static)
 # endif()
+# target_link_libraries(WDBx PRIVATE CascLib::casc)
 
 target_compile_definitions(WMVx PRIVATE STORMLIB_NO_AUTO_LINK)
 target_link_libraries(WMVx PRIVATE StormLib::storm)
@@ -86,16 +87,16 @@ endif()
 target_compile_definitions(WMVx PUBLIC WMVX_VERSION="${CMAKE_PROJECT_VERSION}")
 
 # FBX 
-set(FBK_SDK_ROOT_DIR "" PATH)
-target_include_directories(WMVx PRIVATE ${FBX_SDK_ROOT_DIR}/include)
-if(WIN32)
-target_link_libraries(WMVx PRIVATE "${FBX_SDK_ROOT_DIR}/lib/vs2022/x64/$<IF:$<CONFIG:Debug>,debug,release>/libfbxsdk.lib")
-add_custom_command(TARGET WMVx POST_BUILD
-    COMMAND ${CMAKE_COMMAND} -E copy_if_different 
-    "${FBX_SDK_ROOT_DIR}/lib/vs2022/x64/$<IF:$<CONFIG:Debug>,debug,release>/libfbxsdk.dll"
-    $<TARGET_FILE_DIR:WMVx>
-)
-endif()
+# set(FBK_SDK_ROOT_DIR "C:\\FBX SDK\\2020.3.7" CACHE STRING "FBX SDK root directory")
+# target_include_directories(WMVx PRIVATE ${FBX_SDK_ROOT_DIR}/include)
+# if(WIN32)
+# target_link_libraries(WMVx PRIVATE "${FBX_SDK_ROOT_DIR}/lib/x64/$<IF:$<CONFIG:Debug>,debug,release>/libfbxsdk.lib")
+# add_custom_command(TARGET WMVx POST_BUILD
+#     COMMAND ${CMAKE_COMMAND} -E copy_if_different 
+#     "${FBX_SDK_ROOT_DIR}/lib/x64/$<IF:$<CONFIG:Debug>,debug,release>/libfbxsdk.dll"
+#     $<TARGET_FILE_DIR:WMVx>
+# )
+# endif()
 # END FBX
 
 install(TARGETS WMVx
